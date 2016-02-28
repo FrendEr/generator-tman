@@ -1,0 +1,18 @@
+{
+  "name": "generator-tman",
+  "version": "0.0.1",
+  "description": "unit test generator",
+  "files": [
+    "generators"
+  ],
+  "main": "generators/app/index.js",
+  "keywords": [],
+  "dependencies": {
+    "chalk": "^1.1.1",
+    "lodash": "^3.5.0",
+    "yeoman-generator": "^0.22.5"
+  },
+  "devDependencies": {},
+  "license": "MIT",
+  "repository": "git@github.com:FrendEr/generator-tman.git"
+}
