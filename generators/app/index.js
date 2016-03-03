@@ -82,7 +82,9 @@ module.exports = yeoman.Base.extend({
             if (this.data.cnpm) {
                 this.runInstall('cnpm', '', {});
             } else {
-                this.installDependencies();
+                this.installDependencies({
+                    bower: false
+                });
             }
         }
     }

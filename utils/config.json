@@ -1,0 +1,51 @@
+{
+    "descrition": "config json for generator-tman",
+
+    "assert": {
+        "list": [
+            {
+                "name": "chai",
+                "version": "x.x.x"
+            },
+            {
+                "name": "expect",
+                "version": "x.x.x"
+            },
+            {
+                "name": "should",
+                "version": "x.x.x"
+            }
+        ]
+    },
+
+    "npm-tool": {
+        "list": [
+            {
+                "name": "npm"
+            },
+            {
+                "name": "cnpm"
+            }
+        ]
+    },
+
+    "es2015": {
+        "type": "confirm",
+        "default": true
+    },
+
+    "react": {
+        "type": "confirm",
+        "default": true
+    },
+
+    "coverage": {
+        "type": "confirm",
+        "default": true
+    },
+
+    "install": {
+        "type": "confirm",
+        "default": true
+    }
+}
