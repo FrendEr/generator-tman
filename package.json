@@ -9,7 +9,7 @@
   "keywords": [],
   "dependencies": {
     "chalk": "^1.1.1",
-    "lodash": "^3.5.0",
+    "lodash": "~4.6.1",
     "yeoman-generator": "^0.22.5"
   },
   "devDependencies": {},

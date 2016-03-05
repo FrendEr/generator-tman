@@ -1,0 +1,72 @@
+{
+    "descrition": "dependencies config for generator-tman",
+    "dependencies": [
+        {
+            "group": "react",
+            "name": "react",
+            "version": "x.x.x"
+        },
+        {
+            "group": "react",
+            "name": "react-dom",
+            "version": "x.x.x"
+        }
+    ],
+    "devDependencies": [
+        {
+            "group": "coverage",
+            "name": "istanbul",
+            "version": "x.x.x"
+        },
+        {
+            "group": "coverage-AND-es6",
+            "name": "isparta",
+            "version": "x.x.x"
+        },
+        {
+            "group": "normal",
+            "name": "mocha",
+            "version": "x.x.x"
+        },
+        {
+            "group": "normal",
+            "name": "sinon",
+            "version": "x.x.x"
+        },
+        {
+            "group": "react",
+            "name": "enzyme",
+            "version": "x.x.x"
+        },
+        {
+            "group": "normal",
+            "name": "jsdom",
+            "version": "x.x.x"
+        },
+        {
+            "group": "react",
+            "name": "react-addons-test-utils",
+            "version": "x.x.x"
+        },
+        {
+            "group": "es6",
+            "name": "babel-cli",
+            "version": "x.x.x"
+        },
+        {
+            "group": "react-OR-es6",
+            "name": "babel-register",
+            "version": "x.x.x"
+        },
+        {
+            "group": "react-OR-es6",
+            "name": "babel-preset-es2015",
+            "version": "x.x.x"
+        },
+        {
+            "group": "react",
+            "name": "babel-preset-react",
+            "version": "x.x.x"
+        }
+    ]
+}

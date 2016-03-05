@@ -1,0 +1,18 @@
+var chai = require('chai');
+var jsdom = require('jsdom');
+var sinon = require('sinon');
+var expect = chai.expect;
+var should = chai.should;
+
+// dom
+global.document = jsdom.jsdom('<!doctype html><html><body></body></html>');
+global.window = document.defaultView;
+
+// sinon
+global.sinon = sinon;
+
+// chai.expect
+global.expect = expect;
+
+// chai.should
+should();

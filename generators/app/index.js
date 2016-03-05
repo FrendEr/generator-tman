@@ -1,10 +1,14 @@
 'use strict';
-var yeoman = require('yeoman-generator');
-var chalk = require('chalk');
-var _ = require('lodash');
-var util = require('./util');
+let path = require('path');
+let fs = require('fs');
+let yeoman = require('yeoman-generator');
+let _ = require('lodash');
+let inNeedPrompts = require('./prompts').inNeedPrompts;
+let depPrompts = require('./prompts').depPrompts;
+let utils = require('../../utils');
 
-_.merge(yeoman.Base.prototype, util);
+let mergeUtil = require('./mergeUtil');
+_.merge(yeoman.Base.prototype, mergeUtil);
 
 module.exports = yeoman.Base.extend({
 
@@ -12,75 +16,154 @@ module.exports = yeoman.Base.extend({
         yeoman.Base.apply(this, arguments);
 
         this.data = {
-            coverage: true,
-            install: true,
-            cnpm: false
+            npmTool: 'npm'
         };
         this.config.save();
     },
 
     prompting: function() {
-        var done = this.async();
-
-        var prompts = [{
-            type: 'confirm',
-            name: 'install',
-            message: 'Would you like to install dependencies ?',
-            default: true
-        }];
-
-        if (this.data.install) {
-            prompts.push({
-                type: 'confirm',
-                name: 'cnpm',
-                message: 'Would you like to install dependencies by using CNPM ?',
-                default: true
-            });
-        }
-
-        prompts.push({
-            type: 'list',
-            name: 'assert',
-            message: 'What\'s the assert lib you would prefer to use ?',
-            choices: ['chai'],
-            default: 0
-        });
+        let done = this.async();
+        let prompts = inNeedPrompts;
 
         this.prompt(prompts, function(props) {
             _.assign(this.data, props);
+
+            if (props.install) {
+                let npmToolPrompt = _.find(depPrompts, {'name': 'npmTool'});
+                prompts.push(npmToolPrompt);
+            }
 
             done();
         }.bind(this));
     },
 
-    writing: {
-        srcTpl: function() {
-            this.templatify('src/**/*', 'src/');
-        },
+    depsMapFormat: function(map) {
+        if (!map) return;
+        return JSON.parse('{"' + map.name + '":"' + map.version + '"}');
+    },
 
-        specTpl: function() {
-            this.templatify('test/**/*', 'test/');
-        },
+    addDeps: function(group, dependencies, devDependencies) {
+        const self = this;
 
-        packageJSON: function() {
-            this.templatify('_package.json', 'package.json');
-        },
+        // dependencies
+        _.forEach(utils.config.getDepsByGroup(group), function(value, key) {
+            _.assign(dependencies, self.depsMapFormat(value));
+        });
 
-        babelSetting: function() {
-            this.templatify('_babelrc', '.babelrc');
-        },
+        // devDependencies
+        _.forEach(utils.config.getDevDepsByGroup(group), function(value, key) {
+            _.assign(devDependencies, self.depsMapFormat(value));
+        });
+    },
 
-        instanbulSetting: function() {
+    configuring: function() {
+        let packageSettings = {
+            name: this.data.appName,
+            version: this.data.appVersion,
+            descrition: 'Your descrition here',
+            main: '',
+            scripts: utils.config.getScripts('scripts', this.data.coverage),
+            repository: '',
+            keywords: '',
+            author: 'Your name here',
+            devDependencies: {},
+            dependencies: {}
+        };
+
+        let dependencies = {};
+        let devDependencies = {};
+
+        // add normal dependencies and devDependencies
+        this.addDeps('normal', dependencies, devDependencies);
+
+        // add react dependencies and devDependencies
+        if (this.data.react) {
+            this.addDeps('react', dependencies, devDependencies);
+
+            // change coverage scripts
+            _.assign(packageSettings.scripts, utils.config.getScripts('react', this.data.coverage));
+        }
+
+        // add es6 dependencies and devDependencies
+        if (this.data.es6) {
+            this.addDeps('es6', dependencies, devDependencies);
+
+            // change coverage scripts
+            _.assign(packageSettings.scripts, utils.config.getScripts('es6', this.data.coverage));
+        }
+
+        // add (react || es6) dependencies and devDependencies
+        if (this.data.react || this.data.es6) {
+            this.addDeps('react-OR-es6', dependencies, devDependencies);
+
+            // change coverage scripts
+            _.assign(packageSettings.scripts, utils.config.getScripts('react-OR-es6', this.data.coverage));
+        }
+
+        // add (react && es6) dependencies and devDependencies
+        if (this.data.react && this.data.es6) {
+            this.addDeps('react-AND-es6', dependencies, devDependencies);
+        }
+
+        // add coverage dependencies and devDependencies
+        if (this.data.coverage) {
+            this.addDeps('coverage', dependencies, devDependencies);
+        }
+
+        // add (coverage && es6) dependencies and devDependencies
+        if (this.data.coverage && this.data.es6) {
+            this.addDeps('coverage-AND-es6', dependencies, devDependencies);
+        }
+
+        // add assert dependencies
+        _.assign(devDependencies, this.depsMapFormat({
+            name: this.data.assert,
+            version: 'x.x.x'
+        }));
+
+        _.assign(packageSettings.devDependencies, devDependencies);
+        _.assign(packageSettings.dependencies, dependencies);
+
+        this.fs.writeJSON(this.destinationPath('package.json'), packageSettings);
+    },
+
+    writing: function() {
+        // copy normal template
+        if (!this.data.react && !this.data.es6) {
+            this.templatify('normal/**/*', process.cwd());
+        }
+
+        // copy es6 template
+        if (this.data.es6 && !this.data.react) {
+            this.templatify('es6/**/*', process.cwd());
+            this.templatify('babel/_babelrc-es6', '.babelrc');
+        }
+
+        // copy react template
+        if (this.data.react && !this.data.es6) {
+            this.templatify('react/**/*', process.cwd());
+            this.templatify('babel/_babelrc-react', '.babelrc');
+        }
+
+        // copy react && es6 template
+        if (this.data.react && this.data.es6) {
+            this.templatify('react-and-es6/**/*', process.cwd());
+            this.templatify('babel/_babelrc-es6-and-react', '.babelrc');
+        }
+
+        // copy setup file
+        this.templatify('setup/_setup-' + this.data.assert, 'test/setup.js');
+
+        // copy .instanbul.yml
+        if (this.data.coverage) {
             this.templatify('_istanbul.yml', '.istanbul.yml');
         }
     },
 
     install: function() {
         if (this.data.install) {
-            this.log('npm modules installing... ');
-
-            if (this.data.cnpm) {
-                this.runInstall('cnpm', '', {});
+            if (this.data.npmTool !== 'npm') {
+                this.runInstall(this.data.npmTool, '', {});
             } else {
                 this.installDependencies({
                     bower: false

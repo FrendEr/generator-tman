@@ -1,0 +1,20 @@
+{
+    "descrition": "npm scripts config for generator-tman",
+
+    "scripts": {
+        "test": "./node_modules/.bin/_mocha --recursive",
+        "coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --recursive"
+    },
+
+    "react-OR-es6": {
+        "test": "./node_modules/.bin/_mocha --compilers js:babel-register --recursive"
+    },
+
+    "react": {
+        "coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --compilers js:babel-register --recursive"
+    },
+
+    "es6": {
+        "coverage": "./node_modules/.bin/babel-node ./node_modules/.bin/isparta cover ./node_modules/.bin/_mocha -- --recursive"
+    }
+}

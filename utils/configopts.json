@@ -1,0 +1,17 @@
+{
+    "descrition": "choice config for generator-tman",
+    "assert": [
+        {
+            "name": "chai",
+            "version": "x.x.x"
+        }
+    ],
+    "npm-tool": [
+        {
+            "name": "npm"
+        },
+        {
+            "name": "cnpm"
+        }
+    ]
+}
