@@ -28,7 +28,7 @@ module.exports = yeoman.Base.extend({
         this.prompt(prompts, function(props) {
             _.assign(this.data, props);
 
-            if (props.install) {
+            if (this.data.install) {
                 let npmToolPrompt = _.find(depPrompts, {'name': 'npmTool'});
                 prompts.push(npmToolPrompt);
             }

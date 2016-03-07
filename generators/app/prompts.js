@@ -20,7 +20,7 @@ const inNeedPrompts = [
         name: 'assert',
         message: 'What\'s the assert lib you would prefer to use ?',
         choices: utils.config.getChoice('assert'),
-        default: [0]
+        default: 'chai'
     },
     {
         type: 'confirm',
@@ -55,7 +55,7 @@ const depPrompts = [
         name: 'npmTool',
         message: 'What\'s the npm tool you would prefer to use ?',
         choices: utils.config.getChoice('npm-tool'),
-        default: [0]
+        default: 'npm'
     }
 ];
 
