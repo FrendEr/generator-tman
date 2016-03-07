@@ -16,7 +16,9 @@
     "yeoman-generator": "^0.22.5"
   },
   "devDependencies": {
-    "mocha": "~2.4.5"
+    "mocha": "~2.4.5",
+    "yeoman-assert": "~2.1.1",
+    "yeoman-test": "~1.1.0"
   },
   "license": "MIT",
   "repository": "git@github.com:FrendEr/generator-tman.git"
