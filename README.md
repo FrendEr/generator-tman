@@ -1,4 +1,4 @@
-# generator-tman
+# generator-tman [![Build Status](https://travis-ci.org/FrendEr/generator-tman.svg?branch=master)](https://travis-ci.org/FrendEr/generator-tman)
 > 前端单元测试脚手架，支持 es6、react
 
 ## 安装
