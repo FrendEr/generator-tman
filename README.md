@@ -1,5 +1,5 @@
 # generator-tman
-> unit test generator
+> 前端单元测试脚手架，支持 es6、react
 
 ## 安装
 
@@ -14,23 +14,21 @@ cd /your-repo/dir
 yo tman
 ```
 
+## 运行截图
+![运行截图](./images/snapshoot.png)
+
 ## 运行示例
 
 * 不展示覆盖率信息
 
 ```bash
 npm test
-
-// ./node_modules/.bin/_mocha --compilers js:babel-register --recursive
-
 ```
 
-* 展示覆盖率信息（对 es2015 的语法进行覆盖率计算时不进行编译）
+* 展示覆盖率信息
 
 ```bash
 npm run coverage
-
-// ./node_modules/.bin/babel-node ./node_modules/.bin/isparta cover ./node_modules/.bin/_mocha -- --recursive
 ```
 
 
