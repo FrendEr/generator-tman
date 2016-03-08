@@ -1,4 +1,4 @@
-# generator-tman [![Build Status](https://travis-ci.org/FrendEr/generator-tman.svg?branch=master)](https://travis-ci.org/FrendEr/generator-tman)[![Build Coverage](https://img.shields.io/codecov/c/github/FrendEr/generator-tman/master.svg)](https://codecov.io/github/FrendEr/generator-tman?branch=master)
+# generator-tman [![Build Status](https://travis-ci.org/FrendEr/generator-tman.svg?branch=master)](https://travis-ci.org/FrendEr/generator-tman) [![Build Coverage](https://img.shields.io/codecov/c/github/FrendEr/generator-tman/master.svg)](https://codecov.io/github/FrendEr/generator-tman?branch=master)
 > 前端单元测试脚手架，支持 es6、react
 
 ## 安装
