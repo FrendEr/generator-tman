@@ -5,7 +5,7 @@ node_js:
   - "5.0.0"
 
 # whitelist
-branches:
-  only:
-  - master
-  - stable
+# branches:
+#  only:
+#  - master
+#  - stable
