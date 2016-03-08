@@ -1,10 +1,9 @@
-install:
-  - npm install -g codecov istanbul mocha
 language: node_js
 node_js:
   - "stable"
   - "4.0.0"
   - "5.0.0"
+install:
+  - npm install --dev
 script:
-  - istanbul cover _mocha --report lcovonly -- -R spec
-  - codecov
+  - npm test
