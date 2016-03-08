@@ -1,5 +1,5 @@
 install:
-  - npm install -g codecov
+  - npm install -g codecov istanbul
 language: node_js
 node_js:
   - "stable"
