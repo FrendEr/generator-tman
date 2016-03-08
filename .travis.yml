@@ -7,9 +7,3 @@ node_js:
   - "stable"
   - "4.0.0"
   - "5.0.0"
-
-# whitelist
-# branches:
-#  only:
-#  - master
-#  - stable
