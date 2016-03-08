@@ -10,7 +10,7 @@ describe('normal', function() {
                 .withPrompts({
                     appName: 'tman-normal',
                     appVersion: '1.0.0',
-                    appName: 'chai',
+                    assert: 'chai',
                     es6: false,
                     react: false,
                     coverage: false,
@@ -34,7 +34,7 @@ describe('normal', function() {
                 .withPrompts({
                     appName: 'tman-normal',
                     appVersion: '1.0.0',
-                    appName: 'chai',
+                    assert: 'chai',
                     es6: false,
                     react: false,
                     coverage: true,
